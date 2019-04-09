@@ -1,4 +1,4 @@
-/* global Renderer Quiz, Question, TriviaApi */
+/* global Renderer */
 // eslint-disable-next-line indent
 'use strict';
 
@@ -45,6 +45,7 @@ class QuizDisplay extends Renderer {
         </div>
           <button class="next">Submit answer</button>
         </div>
+
       </form>
 
     `;
@@ -59,10 +60,6 @@ class QuizDisplay extends Renderer {
   }
 
   handleStart() {
-    // const quizData = new TriviaApi();
-    // Quiz.QUIZ_DATA = [quizData.getQuestions()];
     this.model.startNewGame();
-    this.model.update();
-   //console.log(Quiz.QUIZ_DATA);
   }
 }

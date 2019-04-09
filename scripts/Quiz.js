@@ -23,35 +23,24 @@ class Question {
 }
 
 class TriviaApi {
-    constructor()  {
-        this.BASE_URL = 'https://opentdb.com/api.php?amount=5';
-        this.error = '';
-    }
+  constructor()  {
+      this.error = '';
+      }
 
-
-    static apiFetch() {
-      fetch(this.BASE_URL)
-      .then( res => {
-          if(!res.ok){
-              this.error = {code: res.status}
-              return res.json();
-          }
-      })
-      .then(data => {
-          if(this.error){
-              this.error.message = data.message
-              return Promise.reject(`ERROR: ${this.error}`);
-          }
-          return data
-      })
-    }
-
-    static getQuestions() {
-      return this.apiFetch(`${this.BASE_URL}`);
-    }
+  static apiFetch() {
+    return fetch('https://opentdb.com/api.php?amount=5')
+    .then( res => {
+        if(!res.ok){
+            this.error = {code: res.status}
+            return res.json();
+        }
+        return res;
+    })
+    .then(data => {
+        return data.json();
+    })
 }
-
-
+  }
 
 
 /**
@@ -70,17 +59,24 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
     // Your Quiz model's constructor logic should go here. There is just examples below.
     this.active = false;
-    this.questions = [{ id: 1, text: `this is a test`}];
+    this.questions = [{ id: 1, text: `test` }];
     this.asked= [];
     this.score = 0;
     this.highScore = 0;
     this.scoreHistory = [];
     this.progress = 0;
+    this.QUIZ_DATA = [];
 
   }
 
   startNewGame() {
     this.active = true;
+    TriviaApi.apiFetch()
+    .then(questions => {
+      this.QUIZ_DATA.push(...(questions.results));
+      console.log(this.QUIZ_DATA)
+      this.update();
+    })
     console.log(this.questions)
   }
 
