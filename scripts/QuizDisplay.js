@@ -9,7 +9,6 @@ class QuizDisplay extends Renderer {
     return {
       'click .start': 'handleStart',
       'click .next': 'handleNextQuestion',
-      'click .js-answer-input': 'handleAnswer',
     };
   }
   
@@ -35,15 +34,14 @@ class QuizDisplay extends Renderer {
       <div>
       <div>
       <form>
-        <input type="radio" role="button" class="js-answer-input js-answer1" name="answer1"/>
+        <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answer1"/>
         <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer2" name="answer2"/>
+        <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answer2"/>
         <label for="answer2" title="text">${this.model.questions[this.model.progress -1].answers[1]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer3" name="answer3"/>
+        <input type="radio" role="button" class="js-answer-input js-answer3" id="answer3" name="answer3"/>
         <label for="answer3" title="text">${this.model.questions[this.model.progress -1].answers[2]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer4" name="answer4"/>
+        <input type="radio" role="button" class="js-answer-input js-answer4" id="answer3" name="answer4"/>
         <label for="answer4" title="text">${this.model.questions[this.model.progress -1].answers[3]}</label>
-     
         </div>
           <button class="next">Submit answer</button>
         </div>
@@ -63,18 +61,18 @@ class QuizDisplay extends Renderer {
 
   handleStart() {
     this.model.startNewGame();
-
   }
+
   handleNextQuestion(){
+    const aText = $('input:checked + label').text();
+    this.model.nextQuestion(aText);
     
-    this.model.nextQuestion();
     
-    console.log('next was clicked');
+
+    console.log(aText);
+    this.model.update();
   }
 
-   handleAnswer(){
-    console.log($('.js-answer1'));
-   }
 
 }
 

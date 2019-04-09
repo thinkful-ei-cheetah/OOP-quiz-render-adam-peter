@@ -109,15 +109,16 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     })
 
   }
-  nextQuestion() {
+  nextQuestion(aText) {
+    this.asked.push(this.questions[this.progress -1]);
+    console.log(this.asked);
+
+    if(this.questions[this.progress -1].correctAnswer === aText){
+        this.score += 1; 
+    }
+
     this.active = true;
     this.progress += 1;
-    // if(this.questions[this.progress -1].correctAnswer === ){
-    //     score += 1; 
-    // }
-    //console.log(this.questions[this.progress -1].correctAnswer)
-
-    this.update();
   }
   
 }
