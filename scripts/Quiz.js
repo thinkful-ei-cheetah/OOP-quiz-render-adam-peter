@@ -1,4 +1,58 @@
 /* global Model */
+class Question {
+  static attrs = {
+      text: '',
+      answers: [],
+      correctAnswer: '',
+      userAnswer: ''
+  };
+
+  static sumbmitAnswer(answer){
+      this.attrs.userAnswer = answer;
+  }
+  static answerStatus(userAnswer){
+      let answerstate = 0;
+      if (correctAnswer === userAnswer){
+          answerstate = 1;
+      }
+      if (correctAnswer !== userAnswer){
+          answerstate = -1;
+      }
+      return answerstate;
+  }
+}
+
+class TriviaApi {
+  constructor()  {
+      this.BASE_URL = 'https://opentdb.com/api.php?amount=5';
+      this.error = '';
+  }
+
+
+  static apiFetch() {
+      fetch(this.BASE_URL)
+      .then( res => {
+          if(!res.ok){
+              this.error = {code: res.status}
+              return res.json();
+          }
+      })
+      .then(data => {
+          if(this.error){
+              this.error.message = data.message
+              return Promise.reject(`ERROR: ${this.error}`);
+          }
+          return data
+      })
+  }
+
+  static getQuestions() {
+      return this.apiFetch(`${this.BASE_URL}`);
+}
+}
+
+
+
 
 /**
  * You can replace this Quiz with the version you worked on yesterday. It's just
@@ -16,11 +70,18 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
     // Your Quiz model's constructor logic should go here. There is just examples below.
     this.active = false;
-    this.questions = [{ id: 1, text: 'Question 1' }];
+    this.questions = [{ id: 1, text: `${Quiz.QUIZ_DATA[0].question}` }];
+    this.asked= [];
+    this.score = 0;
+    this.highScore = 0;
+    this.scoreHistory = [];
+    this.progress = 0;
+
   }
 
   startNewGame() {
     this.active = true;
+    console.log(this.questions)
   }
 
 }

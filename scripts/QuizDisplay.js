@@ -1,6 +1,10 @@
 /* global Renderer */
+// eslint-disable-next-line indent
+'use strict';
 
-class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
+class QuizDisplay extends Renderer {   
+
+// eslint-disable-line no-unused-vars
   getEvents() {
     return {
       'click .start': 'handleStart',
@@ -25,6 +29,9 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
       <div>
         ${this.model.questions[0].text}
       </div>
+      <div>
+      <button class="next">Submit answer</button>
+    </div>
     `;
   }
 
