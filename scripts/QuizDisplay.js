@@ -18,6 +18,7 @@ class QuizDisplay extends Renderer {
           Welcome to the Trivia Quiz
         </p>
       </div>
+
       <div>
         <button class="start">Start</button>
       </div>
@@ -30,8 +31,22 @@ class QuizDisplay extends Renderer {
         ${this.model.questions[0].text}
       </div>
       <div>
-      <button class="next">Submit answer</button>
-    </div>
+      <div>
+      <form>
+        <input type="radio" role="button" class="js-answer-input" name="answer1"/>
+        <label for="answer1" title="text">[answer goes here]</label>
+        <input type="radio" role="button" class="js-answer-input" name="answer2"/>
+        <label for="answer2" title="text">[answer goes here]</label>
+        <input type="radio" role="button" class="js-answer-input" name="answer3"/>
+        <label for="answer3" title="text">[answer goes here]</label>
+        <input type="radio" role="button" class="js-answer-input" name="answer4"/>
+        <label for="answer4" title="text">[answer goes here]</label>
+
+        </div>
+          <button class="next">Submit answer</button>
+        </div>
+      </form>
+
     `;
   }
 
