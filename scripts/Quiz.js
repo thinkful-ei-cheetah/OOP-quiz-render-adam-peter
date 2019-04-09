@@ -23,13 +23,13 @@ class Question {
 }
 
 class TriviaApi {
-  constructor()  {
-      this.BASE_URL = 'https://opentdb.com/api.php?amount=5';
-      this.error = '';
-  }
+    constructor()  {
+        this.BASE_URL = 'https://opentdb.com/api.php?amount=5';
+        this.error = '';
+    }
 
 
-  static apiFetch() {
+    static apiFetch() {
       fetch(this.BASE_URL)
       .then( res => {
           if(!res.ok){
@@ -44,11 +44,11 @@ class TriviaApi {
           }
           return data
       })
-  }
+    }
 
-  static getQuestions() {
+    static getQuestions() {
       return this.apiFetch(`${this.BASE_URL}`);
-}
+    }
 }
 
 
@@ -70,7 +70,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
     // Your Quiz model's constructor logic should go here. There is just examples below.
     this.active = false;
-    this.questions = [{ id: 1, text: `${Quiz.QUIZ_DATA[0].question}` }];
+    this.questions = [{ id: 1, text: `this is a test`}];
     this.asked= [];
     this.score = 0;
     this.highScore = 0;
