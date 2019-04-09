@@ -1,22 +1,46 @@
 /* global Model */
 class Question {
+    constructor(question){
+        this.text = question.question;
+        this.answers = [question.correct_answer, ...(question.incorrect_answers)];
+        this.correctAnswer = question.correct_answer;
+        this.userAnswer = '';
+
+    }
   static attrs = {
       text: '',
       answers: [],
       correctAnswer: '',
       userAnswer: ''
   };
+//   static answerShuffle(array){
 
-  static sumbmitAnswer(answer){
-      this.attrs.userAnswer = answer;
+//         let currentIndex = array.length;
+//         let temporaryValue, randomIndex;
+    
+//         // While there remain elements to shuffle...
+//         while (0 !== currentIndex) {
+//             // Pick a remaining element...
+//             randomIndex = Math.floor(Math.random() * currentIndex);
+//             currentIndex -= 1;
+    
+//             // And swap it with the current element.
+//             temporaryValue = array[currentIndex];
+//             array[currentIndex] = array[randomIndex];
+//             array[randomIndex] = temporaryValue;
+//         }
+//         return array;
+//   }
+
+  sumbmitAnswer(answer){
+      this.userAnswer = answer;
   }
-  static answerStatus(userAnswer){
+  answerStatus(userAnswer){
       let answerstate = 0;
-      if (correctAnswer === userAnswer){
+      if (this.correctAnswer === userAnswer){
           answerstate = 1;
-      }
-      if (correctAnswer !== userAnswer){
-          answerstate = -1;
+      }else{
+        answerstate = -1;
       }
       return answerstate;
   }
@@ -59,7 +83,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
     // Your Quiz model's constructor logic should go here. There is just examples below.
     this.active = false;
-    this.questions = [{ id: 1, text: `test` }];
+    this.questions = [];
     this.asked= [];
     this.score = 0;
     this.highScore = 0;
@@ -71,13 +95,29 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
   startNewGame() {
     this.active = true;
-    TriviaApi.apiFetch()
+    this.progress += 1; 
+    
+
+    console.log(this.questions);
+    return TriviaApi.apiFetch()
     .then(questions => {
-      this.QUIZ_DATA.push(...(questions.results));
-      console.log(this.QUIZ_DATA)
+    //   this.questions.push(...(questions.results));
+      questions.results.forEach(question => 
+        this.questions.push(new Question(question)));
+        // Question.answerShuffle(this.questions.answers);
       this.update();
     })
-    console.log(this.questions)
-  }
 
+  }
+  nextQuestion() {
+    this.active = true;
+    this.progress += 1;
+    // if(this.questions[this.progress -1].correctAnswer === ){
+    //     score += 1; 
+    // }
+    //console.log(this.questions[this.progress -1].correctAnswer)
+
+    this.update();
+  }
+  
 }
