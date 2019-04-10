@@ -5,33 +5,9 @@ class Question {
         this.answers = [question.correct_answer, ...(question.incorrect_answers)];
         this.correctAnswer = question.correct_answer;
         this.userAnswer = '';
+        this.answers = this.shuffle(this.answers);
 
     }
-  static attrs = {
-      text: '',
-      answers: [],
-      correctAnswer: '',
-      userAnswer: ''
-  };
-//   static answerShuffle(array){
-
-//         let currentIndex = array.length;
-//         let temporaryValue, randomIndex;
-    
-//         // While there remain elements to shuffle...
-//         while (0 !== currentIndex) {
-//             // Pick a remaining element...
-//             randomIndex = Math.floor(Math.random() * currentIndex);
-//             currentIndex -= 1;
-    
-//             // And swap it with the current element.
-//             temporaryValue = array[currentIndex];
-//             array[currentIndex] = array[randomIndex];
-//             array[randomIndex] = temporaryValue;
-//         }
-//         return array;
-//   }
-
   sumbmitAnswer(answer){
       this.userAnswer = answer;
   }
@@ -43,6 +19,13 @@ class Question {
         answerstate = -1;
       }
       return answerstate;
+  }
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 }
 
