@@ -4,11 +4,13 @@
 
 class QuizDisplay extends Renderer {   
 
-// eslint-disable-line no-unused-vars
+  // eslint-disable-line no-unused-vars
   getEvents() {
     return {
       'click .start': 'handleStart',
       'click .next': 'handleNextQuestion',
+      'click .proceed': 'handleProceed',
+      'click .again': 'handleStart'
     };
   }
   
@@ -51,11 +53,49 @@ class QuizDisplay extends Renderer {
     `;
   }
 
+  _generateCheck(){
+    return `
+    <div>
+        ${this.model.questions[this.model.progress -1].text}
+    </div>
+    <div>
+      The correct answer was:
+        ${this.model.questions[this.model.progress -1].correctAnswer}
+    </div>
+    <div>
+      your answer was
+        <div>${this.model.answerSelection}</div>
+    </div>
+    <button class='proceed'>proceed</button>
+    `;
+  }
+
+  _generateEnd() {
+    return `
+    <div>
+      <div>Congratulations!</div>
+      <div>Your final score was ${this.model.score} out of 5</div>
+      <div>[if highscore show]</div>
+      <button class="again">
+        play again?
+      </button>
+
+    </div>
+  `;
+  }
+
   template() {
-    if (this.model.active) {
-      return this._generateQuestion();
-    } else {
+    switch(this.model.currentScreen){
+    case 0:
       return this._generateIntro();
+    case 1: 
+      return this._generateQuestion();
+    case 2: 
+      return this._generateCheck();
+    
+    case 3: 
+      return this._generateEnd();
+    
     }
   }
 
@@ -67,12 +107,20 @@ class QuizDisplay extends Renderer {
     const aText = $('input:checked + label').text();
     this.model.nextQuestion(aText);
     
-    
-
     console.log(aText);
     this.model.update();
   }
 
+  handleProceed() {
+    
+    this.model.currentScreen = 1;
+    if (this.model.progress === 5){
+      this.model.currentScreen = 3;
+      this.model.scoreHistory.push(this.model.score);
+    }
+    this.model.progress += 1;
+    this.model.update();
+  }
 
 }
 

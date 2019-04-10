@@ -82,7 +82,8 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     super();
 
     // Your Quiz model's constructor logic should go here. There is just examples below.
-    this.active = false;
+    this.currentScreen = 0;
+    this.answerSelection = '';
     this.questions = [];
     this.asked= [];
     this.score = 0;
@@ -94,8 +95,13 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   }
 
   startNewGame() {
-    this.active = true;
-    this.progress += 1; 
+    this.currentScreen = 1;
+    this.progress = 0;
+    this.questions = [];
+    this.score = 0;
+
+    this.progress += 1;
+    this.highScore = Math.max(this.scoreHistory); 
     
 
     console.log(this.questions);
@@ -113,12 +119,12 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     this.asked.push(this.questions[this.progress -1]);
     console.log(this.asked);
 
+    this.answerSelection = aText;
     if(this.questions[this.progress -1].correctAnswer === aText){
         this.score += 1; 
     }
 
-    this.active = true;
-    this.progress += 1;
+    this.currentScreen = 2;
   }
   
 }
