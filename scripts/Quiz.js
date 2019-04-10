@@ -101,7 +101,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     this.score = 0;
 
     this.progress += 1;
-    this.highScore = Math.max(this.scoreHistory); 
+    this.highScore = Math.max(...(this.scoreHistory)); 
     
 
     console.log(this.questions);
@@ -125,6 +125,12 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     }
 
     this.currentScreen = 2;
+  }
+
+  handleFinish() {
+    this.currentScreen = 3;
+    this.scoreHistory.push(this.score);
+    
   }
   
 }

@@ -54,6 +54,22 @@ class QuizDisplay extends Renderer {
   }
 
   _generateCheck(){
+    if(this.model.questions[this.model.progress -1].correctAnswer === this.model.answerSelection) {
+      return `
+      <div>
+        ${this.model.questions[this.model.progress -1].text}
+      </div>
+      <div>
+      The correct answer was:
+        ${this.model.questions[this.model.progress -1].correctAnswer}
+      </div>
+      <div>
+      You got it right!
+      </div>
+      <button class='proceed'>proceed</button>
+      `;
+    }
+    
     return `
     <div>
         ${this.model.questions[this.model.progress -1].text}
@@ -71,11 +87,23 @@ class QuizDisplay extends Renderer {
   }
 
   _generateEnd() {
+    if (this.model.score > this.model.highScore) {
+      return `
+      <div>
+        <div>Congratulations!</div>
+        <div>Your final score was ${this.model.score} out of 5</div>
+        <div>That's a new HIGHSCORE!</div>
+        <button class="again">
+          play again?
+        </button>
+
+      </div>
+      `;
+    }
     return `
     <div>
       <div>Congratulations!</div>
       <div>Your final score was ${this.model.score} out of 5</div>
-      <div>[if highscore show]</div>
       <button class="again">
         play again?
       </button>
@@ -115,8 +143,7 @@ class QuizDisplay extends Renderer {
     
     this.model.currentScreen = 1;
     if (this.model.progress === 5){
-      this.model.currentScreen = 3;
-      this.model.scoreHistory.push(this.model.score);
+      this.model.handleFinish();
     }
     this.model.progress += 1;
     this.model.update();
