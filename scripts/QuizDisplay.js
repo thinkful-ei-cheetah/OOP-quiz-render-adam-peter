@@ -37,9 +37,9 @@ class QuizDisplay extends Renderer {
       <div>
         <div>
           <form>
-            <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answer1"/>
+            <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answers"/>
             <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
-            <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answer2"/>
+            <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answers"/>
             <label for="answer2" title="text">${this.model.questions[this.model.progress -1].answers[1]}</label>
         </div>
         <button class="next">Submit answer</button>
@@ -56,13 +56,13 @@ class QuizDisplay extends Renderer {
       <div>
       <div>
       <form>
-        <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answer1"/>
+        <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answers"/>
         <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answer2"/>
+        <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answers"/>
         <label for="answer2" title="text">${this.model.questions[this.model.progress -1].answers[1]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer3" id="answer3" name="answer3"/>
+        <input type="radio" role="button" class="js-answer-input js-answer3" id="answer3" name="answers"/>
         <label for="answer3" title="text">${this.model.questions[this.model.progress -1].answers[2]}</label>
-        <input type="radio" role="button" class="js-answer-input js-answer4" id="answer3" name="answer4"/>
+        <input type="radio" role="button" class="js-answer-input js-answer4" id="answer3" name="answers"/>
         <label for="answer4" title="text">${this.model.questions[this.model.progress -1].answers[3]}</label>
         </div>
           <button class="next">Submit answer</button>
