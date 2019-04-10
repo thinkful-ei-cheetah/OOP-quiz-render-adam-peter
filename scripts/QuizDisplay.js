@@ -31,12 +31,12 @@ class QuizDisplay extends Renderer {
   _generateQuestion() {
     if (this.model.questions[this.model.progress -1].answers.length < 3) {
       return `
-      <div>
+      <div class="question">
       ${this.model.questions[this.model.progress -1].text}
       </div>
       <div>
         <div>
-          <form>
+          <form class="answer_form">
             <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answers"/>
             <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
             <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answers"/>
@@ -51,12 +51,12 @@ class QuizDisplay extends Renderer {
     }
 
     return `
-      <div>
+      <div class="question">
         ${this.model.questions[this.model.progress -1].text}
       </div>
       <div>
       <div>
-      <form>
+      <form class="answer_form">
         <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answers"/>
         <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
         <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answers"/>
@@ -76,7 +76,7 @@ class QuizDisplay extends Renderer {
   _generateCheck(){
     if(this.model.questions[this.model.progress -1].correctAnswer === this.model.answerSelection) {
       return `
-      <div>
+      <div class="question">
         ${this.model.questions[this.model.progress -1].text}
       </div>
       <div>
@@ -91,7 +91,7 @@ class QuizDisplay extends Renderer {
     }
     
     return `
-    <div>
+    <div class="question">
         ${this.model.questions[this.model.progress -1].text}
     </div>
     <div>
@@ -109,7 +109,7 @@ class QuizDisplay extends Renderer {
   _generateEnd() {
     if (this.model.score > this.model.highScore) {
       return `
-      <div>
+      <div class="end_screen">
         <div>Congratulations!</div>
         <div>Your final score was ${this.model.score} out of 5</div>
         <div>That's a new HIGHSCORE!</div>
@@ -121,7 +121,7 @@ class QuizDisplay extends Renderer {
       `;
     }
     return `
-    <div>
+    <div class="end_screen">
       <div>Congratulations!</div>
       <div>Your final score was ${this.model.score} out of 5</div>
       <button class="again">

@@ -1,0 +1,58 @@
+body {
+    font-family: 'roboto', sans-serif;
+    font: 15px roboto, sanserif;
+}
+/* .display{
+    max-width: 460px;
+    margin: 20px auto;
+    border: 1px solid black;
+}
+.status{
+    max-width: 460px;
+    margin: auto;
+} */
+
+main{
+    max-width: 460px;
+    margin: 20px auto;
+}
+.display{
+    border: 1px solid black;
+    padding: 10px;
+}
+.answer_form > input, label{
+    display: block;
+}
+.answer_form > label{
+    font-size: 12;
+}
+.question{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.status{
+    border: 1px solid black;
+    padding: 10px;
+}
+/* .status > span{
+    text-align: center;
+} */
+
+.score{
+    font-size: 14;
+    font-weight: bold;
+}
+.end_screen{
+    font-size: 20px;
+    font-weight: bolder;
+}
+.again {
+    position: relative;
+    width: 75%;
+    height: 20px;
+    margin: 10px auto;
+    font-size: 15px;
+
+}

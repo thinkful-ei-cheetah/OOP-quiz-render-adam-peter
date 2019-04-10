@@ -7,18 +7,18 @@ class QuizStatus extends Renderer {
     if (this.model.currentScreen === 3) {
       return `
       <div>
-        <span>Score: ${this.model.score}</span>
-        <span>High Score: ${this.model.highScore}</span>
-        <span>Progress: invactive</span>
+        <span class="current_score score">Score: ${this.model.score}</span>
+        <span class="high_score score">High Score: ${this.model.highScore}</span>
+        <span class="progress score">Progress: invactive</span>
       </div>
       `;
     }
 
     return `
       <div>
-        <span>Score: ${this.model.score}</span>
-        <span>High Score: ${this.model.highScore}</span>
-        <span>Progress: ${this.model.progress} of ${this.model.questions.length}</span>
+        <span class="current_score score" >Score: ${this.model.score}</span>
+        <span class="high_score score">High Score: ${this.model.highScore}</span>
+        <span class="progress score">Progress: ${this.model.progress} of ${this.model.questions.length}</span>
       </div>
     `;
   }
