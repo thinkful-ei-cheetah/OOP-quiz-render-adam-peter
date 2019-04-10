@@ -88,7 +88,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     this.asked= [];
     this.score = 0;
     this.highScore = 0;
-    this.scoreHistory = [];
+    this.scoreHistory = [0];
     this.progress = 0;
     this.QUIZ_DATA = [];
 
@@ -117,7 +117,6 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   }
   nextQuestion(aText) {
     this.asked.push(this.questions[this.progress -1]);
-    console.log(this.asked);
 
     this.answerSelection = aText;
     if(this.questions[this.progress -1].correctAnswer === aText){

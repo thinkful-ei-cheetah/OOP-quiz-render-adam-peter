@@ -134,8 +134,6 @@ class QuizDisplay extends Renderer {
   handleNextQuestion(){
     const aText = $('input:checked + label').text();
     this.model.nextQuestion(aText);
-    
-    console.log(aText);
     this.model.update();
   }
 
