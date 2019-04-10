@@ -29,6 +29,26 @@ class QuizDisplay extends Renderer {
   }
 
   _generateQuestion() {
+    if (this.model.questions[this.model.progress -1].answers.length < 3) {
+      return `
+      <div>
+      ${this.model.questions[this.model.progress -1].text}
+      </div>
+      <div>
+        <div>
+          <form>
+            <input type="radio" role="button" class="js-answer-input js-answer1" id="answer1" name="answer1"/>
+            <label for="answer1" title="text">${this.model.questions[this.model.progress -1].answers[0]}</label>
+            <input type="radio" role="button" class="js-answer-input js-answer2" id="answer2" name="answer2"/>
+            <label for="answer2" title="text">${this.model.questions[this.model.progress -1].answers[1]}</label>
+        </div>
+        <button class="next">Submit answer</button>
+      </div>
+
+    </form>
+      `;
+    }
+
     return `
       <div>
         ${this.model.questions[this.model.progress -1].text}
