@@ -8,18 +8,18 @@ class Question {
         this.answers = this.shuffle(this.answers);
 
     }
-  sumbmitAnswer(answer){
-      this.userAnswer = answer;
-  }
-  answerStatus(userAnswer){
-      let answerstate = 0;
-      if (this.correctAnswer === userAnswer){
-          answerstate = 1;
-      }else{
-        answerstate = -1;
-      }
-      return answerstate;
-  }
+  // sumbmitAnswer(answer){
+  //     this.userAnswer = answer;
+  // }
+  // answerStatus(userAnswer){
+  //     let answerstate = 0;
+  //     if (this.correctAnswer === userAnswer){
+  //         answerstate = 1;
+  //     }else{
+  //       answerstate = -1;
+  //     }
+  //     return answerstate;
+  // }
   shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -74,6 +74,8 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     this.scoreHistory = [0];
     this.progress = 0;
     this.QUIZ_DATA = [];
+    this.error = 0;
+
 
   }
 
@@ -99,14 +101,18 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
   }
   nextQuestion(aText) {
-    this.asked.push(this.questions[this.progress -1]);
-
-    this.answerSelection = aText;
-    if(this.questions[this.progress -1].correctAnswer === aText){
-        this.score += 1; 
+    if (aText === ''){
+      this.error = 1;
     }
-
+    else{
+    this.asked.push(this.questions[this.progress -1]);
+    this.answerSelection = aText;
+      if(this.questions[this.progress -1].correctAnswer === aText){
+        this.score += 1; 
+      }
     this.currentScreen = 2;
+    this.error = 0;
+    }
   }
 
   handleFinish() {

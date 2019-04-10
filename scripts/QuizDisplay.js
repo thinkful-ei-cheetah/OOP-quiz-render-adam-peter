@@ -46,6 +46,7 @@ class QuizDisplay extends Renderer {
       </div>
 
     </form>
+
       `;
     }
 
@@ -67,10 +68,9 @@ class QuizDisplay extends Renderer {
         </div>
           <button class="next">Submit answer</button>
         </div>
-
       </form>
+      `;
 
-    `;
   }
 
   _generateCheck(){
@@ -133,18 +133,24 @@ class QuizDisplay extends Renderer {
   }
 
   template() {
+    let error = ''
+    this.model.error ? error = '<section>error [error message]</section>': error = '';
+
     switch(this.model.currentScreen){
     case 0:
       return this._generateIntro();
     case 1: 
-      return this._generateQuestion();
+      return this._generateQuestion() + error;
     case 2: 
       return this._generateCheck();
     
     case 3: 
       return this._generateEnd();
+    } 
+  
+
+
     
-    }
   }
 
   handleStart() {
@@ -153,6 +159,13 @@ class QuizDisplay extends Renderer {
 
   handleNextQuestion(){
     const aText = $('input:checked + label').text();
+    
+    // if (aText === ''){
+    //   $('.entry-error').html(`
+    //   <div class="error-message">please select an answer</div>
+    //   `);
+    // }
+    
     this.model.nextQuestion(aText);
     this.model.update();
   }
